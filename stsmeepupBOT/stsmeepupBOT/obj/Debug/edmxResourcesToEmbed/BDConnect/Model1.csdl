@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="stsmeepupModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="connectChatAdmin">
+    <Key>
+      <PropertyRef Name="id_connect" />
+    </Key>
+    <Property Name="id_connect" Type="Int32" Nullable="false" />
+    <Property Name="id_chat" Type="Int32" Nullable="false" />
+    <Property Name="id_admin" Type="Int32" />
+    <NavigationProperty Name="admins" Relationship="stsmeepupModel.FK__connectCh__id_ad__173876EA" FromRole="connectChatAdmin" ToRole="admins" />
+    <NavigationProperty Name="chats" Relationship="stsmeepupModel.FK__connectCh__id_ch__164452B1" FromRole="connectChatAdmin" ToRole="chats" />
+  </EntityType>
+  <EntityType Name="typeStatusMeeting">
+    <Key>
+      <PropertyRef Name="id_status" />
+    </Key>
+    <Property Name="id_status" Type="Int32" Nullable="false" />
+    <Property Name="nameStatus" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="meetings" Relationship="stsmeepupModel.FK__meetings__status__1CF15040" FromRole="typeStatusMeeting" ToRole="meetings" />
+  </EntityType>
+  <EntityContainer Name="stsmeepupEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="connectChatAdmin" EntityType="Self.connectChatAdmin" />
+    <EntitySet Name="typeStatusMeeting" EntityType="Self.typeStatusMeeting" />
+    <EntitySet Name="meetings" EntityType="stsmeepupModel.meetings" />
+    <AssociationSet Name="FK__meetings__status__1CF15040" Association="stsmeepupModel.FK__meetings__status__1CF15040">
+      <End Role="typeStatusMeeting" EntitySet="typeStatusMeeting" />
+      <End Role="meetings" EntitySet="meetings" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="stsmeepupModel.sysdiagrams" />
+    <EntitySet Name="admins" EntityType="stsmeepupModel.admins" />
+    <AssociationSet Name="FK__connectCh__id_ad__173876EA" Association="stsmeepupModel.FK__connectCh__id_ad__173876EA">
+      <End Role="admins" EntitySet="admins" />
+      <End Role="connectChatAdmin" EntitySet="connectChatAdmin" />
+    </AssociationSet>
+    <EntitySet Name="chats" EntityType="stsmeepupModel.chats" />
+    <AssociationSet Name="FK__connectCh__id_ch__164452B1" Association="stsmeepupModel.FK__connectCh__id_ch__164452B1">
+      <End Role="chats" EntitySet="chats" />
+      <End Role="connectChatAdmin" EntitySet="connectChatAdmin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__meetings__id_cha__1BFD2C07" Association="stsmeepupModel.FK__meetings__id_cha__1BFD2C07">
+      <End Role="chats" EntitySet="chats" />
+      <End Role="meetings" EntitySet="meetings" />
+    </AssociationSet>
+    <EntitySet Name="connectUsersFinishedMeetings" EntityType="stsmeepupModel.connectUsersFinishedMeetings" />
+    <EntitySet Name="finishedMeetings" EntityType="stsmeepupModel.finishedMeetings" />
+    <EntitySet Name="users" EntityType="stsmeepupModel.users" />
+    <AssociationSet Name="FK__connectUs__id_fi__2DE6D218" Association="stsmeepupModel.FK__connectUs__id_fi__2DE6D218">
+      <End Role="finishedMeetings" EntitySet="finishedMeetings" />
+      <End Role="connectUsersFinishedMeetings" EntitySet="connectUsersFinishedMeetings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__connectUs__id_us__2EDAF651" Association="stsmeepupModel.FK__connectUs__id_us__2EDAF651">
+      <End Role="users" EntitySet="users" />
+      <End Role="connectUsersFinishedMeetings" EntitySet="connectUsersFinishedMeetings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__finishedM__id_me__2B0A656D" Association="stsmeepupModel.FK__finishedM__id_me__2B0A656D">
+      <End Role="meetings" EntitySet="meetings" />
+      <End Role="finishedMeetings" EntitySet="finishedMeetings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="meetings">
+    <Key>
+      <PropertyRef Name="id_meeting" />
+    </Key>
+    <Property Name="id_meeting" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_chat" Type="Int32" Nullable="false" />
+    <Property Name="titleMeeting" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="descriptionMeeting" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dateCreateMeeting" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="notificationMeeting" Type="Int32" Nullable="false" />
+    <Property Name="dateEventMeeting" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="statusMeeting" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="typeStatusMeeting" Relationship="stsmeepupModel.FK__meetings__status__1CF15040" FromRole="meetings" ToRole="typeStatusMeeting" />
+    <NavigationProperty Name="chats" Relationship="stsmeepupModel.FK__meetings__id_cha__1BFD2C07" FromRole="meetings" ToRole="chats" />
+    <NavigationProperty Name="finishedMeetings" Relationship="stsmeepupModel.FK__finishedM__id_me__2B0A656D" FromRole="meetings" ToRole="finishedMeetings" />
+  </EntityType>
+  <Association Name="FK__meetings__status__1CF15040">
+    <End Type="stsmeepupModel.typeStatusMeeting" Role="typeStatusMeeting" Multiplicity="1" />
+    <End Type="stsmeepupModel.meetings" Role="meetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeStatusMeeting">
+        <PropertyRef Name="id_status" />
+      </Principal>
+      <Dependent Role="meetings">
+        <PropertyRef Name="statusMeeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="admins">
+    <Key>
+      <PropertyRef Name="id_admin" />
+    </Key>
+    <Property Name="id_admin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="chatid" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="chatStatus" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="connectChatAdmin" Relationship="stsmeepupModel.FK__connectCh__id_ad__173876EA" FromRole="admins" ToRole="connectChatAdmin" />
+  </EntityType>
+  <Association Name="FK__connectCh__id_ad__173876EA">
+    <End Type="stsmeepupModel.admins" Role="admins" Multiplicity="0..1" />
+    <End Type="stsmeepupModel.connectChatAdmin" Role="connectChatAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admins">
+        <PropertyRef Name="id_admin" />
+      </Principal>
+      <Dependent Role="connectChatAdmin">
+        <PropertyRef Name="id_admin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="chats">
+    <Key>
+      <PropertyRef Name="id_chat" />
+    </Key>
+    <Property Name="id_chat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameChat" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="chatId" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="connectChatAdmin" Relationship="stsmeepupModel.FK__connectCh__id_ch__164452B1" FromRole="chats" ToRole="connectChatAdmin" />
+    <NavigationProperty Name="meetings" Relationship="stsmeepupModel.FK__meetings__id_cha__1BFD2C07" FromRole="chats" ToRole="meetings" />
+  </EntityType>
+  <Association Name="FK__connectCh__id_ch__164452B1">
+    <End Type="stsmeepupModel.chats" Role="chats" Multiplicity="1" />
+    <End Type="stsmeepupModel.connectChatAdmin" Role="connectChatAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chats">
+        <PropertyRef Name="id_chat" />
+      </Principal>
+      <Dependent Role="connectChatAdmin">
+        <PropertyRef Name="id_chat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__meetings__id_cha__1BFD2C07">
+    <End Type="stsmeepupModel.chats" Role="chats" Multiplicity="1" />
+    <End Type="stsmeepupModel.meetings" Role="meetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chats">
+        <PropertyRef Name="id_chat" />
+      </Principal>
+      <Dependent Role="meetings">
+        <PropertyRef Name="id_chat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="connectUsersFinishedMeetings">
+    <Key>
+      <PropertyRef Name="id_connect" />
+    </Key>
+    <Property Name="id_connect" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_finishedMeeting" Type="Int32" Nullable="false" />
+    <Property Name="id_user" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="finishedMeetings" Relationship="stsmeepupModel.FK__connectUs__id_fi__2DE6D218" FromRole="connectUsersFinishedMeetings" ToRole="finishedMeetings" />
+    <NavigationProperty Name="users" Relationship="stsmeepupModel.FK__connectUs__id_us__2EDAF651" FromRole="connectUsersFinishedMeetings" ToRole="users" />
+  </EntityType>
+  <EntityType Name="finishedMeetings">
+    <Key>
+      <PropertyRef Name="id_finishedMeeting" />
+    </Key>
+    <Property Name="id_finishedMeeting" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_meeting" Type="Int32" Nullable="false" />
+    <Property Name="duration" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="connectUsersFinishedMeetings" Relationship="stsmeepupModel.FK__connectUs__id_fi__2DE6D218" FromRole="finishedMeetings" ToRole="connectUsersFinishedMeetings" />
+    <NavigationProperty Name="meetings" Relationship="stsmeepupModel.FK__finishedM__id_me__2B0A656D" FromRole="finishedMeetings" ToRole="meetings" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="connectUsersFinishedMeetings" Relationship="stsmeepupModel.FK__connectUs__id_us__2EDAF651" FromRole="users" ToRole="connectUsersFinishedMeetings" />
+  </EntityType>
+  <Association Name="FK__connectUs__id_fi__2DE6D218">
+    <End Type="stsmeepupModel.finishedMeetings" Role="finishedMeetings" Multiplicity="1" />
+    <End Type="stsmeepupModel.connectUsersFinishedMeetings" Role="connectUsersFinishedMeetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="finishedMeetings">
+        <PropertyRef Name="id_finishedMeeting" />
+      </Principal>
+      <Dependent Role="connectUsersFinishedMeetings">
+        <PropertyRef Name="id_finishedMeeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__connectUs__id_us__2EDAF651">
+    <End Type="stsmeepupModel.users" Role="users" Multiplicity="1" />
+    <End Type="stsmeepupModel.connectUsersFinishedMeetings" Role="connectUsersFinishedMeetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="connectUsersFinishedMeetings">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__finishedM__id_me__2B0A656D">
+    <End Type="stsmeepupModel.meetings" Role="meetings" Multiplicity="1" />
+    <End Type="stsmeepupModel.finishedMeetings" Role="finishedMeetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="meetings">
+        <PropertyRef Name="id_meeting" />
+      </Principal>
+      <Dependent Role="finishedMeetings">
+        <PropertyRef Name="id_meeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

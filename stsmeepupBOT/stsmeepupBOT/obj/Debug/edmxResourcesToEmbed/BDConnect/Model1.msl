@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище stsmeepupModelContainer" CdmEntityContainer="stsmeepupEntities">
+    <EntitySetMapping Name="connectChatAdmin">
+      <EntityTypeMapping TypeName="stsmeepupModel.connectChatAdmin">
+        <MappingFragment StoreEntitySet="connectChatAdmin">
+          <ScalarProperty Name="id_connect" ColumnName="id_connect" />
+          <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+          <ScalarProperty Name="id_admin" ColumnName="id_admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeStatusMeeting">
+      <EntityTypeMapping TypeName="stsmeepupModel.typeStatusMeeting">
+        <MappingFragment StoreEntitySet="typeStatusMeeting">
+          <ScalarProperty Name="id_status" ColumnName="id_status" />
+          <ScalarProperty Name="nameStatus" ColumnName="nameStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meetings">
+      <EntityTypeMapping TypeName="stsmeepupModel.meetings">
+        <MappingFragment StoreEntitySet="meetings">
+          <ScalarProperty Name="statusMeeting" ColumnName="statusMeeting" />
+          <ScalarProperty Name="dateEventMeeting" ColumnName="dateEventMeeting" />
+          <ScalarProperty Name="notificationMeeting" ColumnName="notificationMeeting" />
+          <ScalarProperty Name="dateCreateMeeting" ColumnName="dateCreateMeeting" />
+          <ScalarProperty Name="descriptionMeeting" ColumnName="descriptionMeeting" />
+          <ScalarProperty Name="titleMeeting" ColumnName="titleMeeting" />
+          <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+          <ScalarProperty Name="id_meeting" ColumnName="id_meeting" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="stsmeepupModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="stsmeepupModel.admins">
+        <MappingFragment StoreEntitySet="admins">
+          <ScalarProperty Name="chatStatus" ColumnName="chatStatus" />
+          <ScalarProperty Name="chatid" ColumnName="chatid" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id_admin" ColumnName="id_admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chats">
+      <EntityTypeMapping TypeName="stsmeepupModel.chats">
+        <MappingFragment StoreEntitySet="chats">
+          <ScalarProperty Name="chatId" ColumnName="chatId" />
+          <ScalarProperty Name="nameChat" ColumnName="nameChat" />
+          <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="connectUsersFinishedMeetings">
+      <EntityTypeMapping TypeName="stsmeepupModel.connectUsersFinishedMeetings">
+        <MappingFragment StoreEntitySet="connectUsersFinishedMeetings">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_finishedMeeting" ColumnName="id_finishedMeeting" />
+          <ScalarProperty Name="id_connect" ColumnName="id_connect" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="finishedMeetings">
+      <EntityTypeMapping TypeName="stsmeepupModel.finishedMeetings">
+        <MappingFragment StoreEntitySet="finishedMeetings">
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="id_meeting" ColumnName="id_meeting" />
+          <ScalarProperty Name="id_finishedMeeting" ColumnName="id_finishedMeeting" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="stsmeepupModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

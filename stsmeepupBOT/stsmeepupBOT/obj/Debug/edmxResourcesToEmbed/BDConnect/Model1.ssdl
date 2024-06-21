@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище stsmeepupModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admins">
+    <Key>
+      <PropertyRef Name="id_admin" />
+    </Key>
+    <Property Name="id_admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="chatid" Type="varchar" MaxLength="120" />
+    <Property Name="chatStatus" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="chats">
+    <Key>
+      <PropertyRef Name="id_chat" />
+    </Key>
+    <Property Name="id_chat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameChat" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="chatId" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="connectChatAdmin">
+    <Key>
+      <PropertyRef Name="id_connect" />
+    </Key>
+    <Property Name="id_connect" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_chat" Type="int" Nullable="false" />
+    <Property Name="id_admin" Type="int" />
+  </EntityType>
+  <EntityType Name="connectUsersFinishedMeetings">
+    <Key>
+      <PropertyRef Name="id_connect" />
+    </Key>
+    <Property Name="id_connect" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_finishedMeeting" Type="int" Nullable="false" />
+    <Property Name="id_user" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="finishedMeetings">
+    <Key>
+      <PropertyRef Name="id_finishedMeeting" />
+    </Key>
+    <Property Name="id_finishedMeeting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_meeting" Type="int" Nullable="false" />
+    <Property Name="duration" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="meetings">
+    <Key>
+      <PropertyRef Name="id_meeting" />
+    </Key>
+    <Property Name="id_meeting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_chat" Type="int" Nullable="false" />
+    <Property Name="titleMeeting" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="descriptionMeeting" Type="text" Nullable="false" />
+    <Property Name="dateCreateMeeting" Type="datetime" Nullable="false" />
+    <Property Name="notificationMeeting" Type="int" Nullable="false" />
+    <Property Name="dateEventMeeting" Type="datetime" Nullable="false" />
+    <Property Name="statusMeeting" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="typeStatusMeeting">
+    <Key>
+      <PropertyRef Name="id_status" />
+    </Key>
+    <Property Name="id_status" Type="int" Nullable="false" />
+    <Property Name="nameStatus" Type="varchar" MaxLength="120" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="userId" Type="varchar" MaxLength="120" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__connectCh__id_ad__173876EA">
+    <End Role="admins" Type="Self.admins" Multiplicity="0..1" />
+    <End Role="connectChatAdmin" Type="Self.connectChatAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admins">
+        <PropertyRef Name="id_admin" />
+      </Principal>
+      <Dependent Role="connectChatAdmin">
+        <PropertyRef Name="id_admin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__connectCh__id_ch__164452B1">
+    <End Role="chats" Type="Self.chats" Multiplicity="1" />
+    <End Role="connectChatAdmin" Type="Self.connectChatAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chats">
+        <PropertyRef Name="id_chat" />
+      </Principal>
+      <Dependent Role="connectChatAdmin">
+        <PropertyRef Name="id_chat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__connectUs__id_fi__2DE6D218">
+    <End Role="finishedMeetings" Type="Self.finishedMeetings" Multiplicity="1" />
+    <End Role="connectUsersFinishedMeetings" Type="Self.connectUsersFinishedMeetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="finishedMeetings">
+        <PropertyRef Name="id_finishedMeeting" />
+      </Principal>
+      <Dependent Role="connectUsersFinishedMeetings">
+        <PropertyRef Name="id_finishedMeeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__connectUs__id_us__2EDAF651">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="connectUsersFinishedMeetings" Type="Self.connectUsersFinishedMeetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="connectUsersFinishedMeetings">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__finishedM__id_me__2B0A656D">
+    <End Role="meetings" Type="Self.meetings" Multiplicity="1" />
+    <End Role="finishedMeetings" Type="Self.finishedMeetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="meetings">
+        <PropertyRef Name="id_meeting" />
+      </Principal>
+      <Dependent Role="finishedMeetings">
+        <PropertyRef Name="id_meeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__meetings__id_cha__1BFD2C07">
+    <End Role="chats" Type="Self.chats" Multiplicity="1" />
+    <End Role="meetings" Type="Self.meetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chats">
+        <PropertyRef Name="id_chat" />
+      </Principal>
+      <Dependent Role="meetings">
+        <PropertyRef Name="id_chat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__meetings__status__1CF15040">
+    <End Role="typeStatusMeeting" Type="Self.typeStatusMeeting" Multiplicity="1" />
+    <End Role="meetings" Type="Self.meetings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeStatusMeeting">
+        <PropertyRef Name="id_status" />
+      </Principal>
+      <Dependent Role="meetings">
+        <PropertyRef Name="statusMeeting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище stsmeepupModelContainer">
+    <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chats" EntityType="Self.chats" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="connectChatAdmin" EntityType="Self.connectChatAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="connectUsersFinishedMeetings" EntityType="Self.connectUsersFinishedMeetings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="finishedMeetings" EntityType="Self.finishedMeetings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="meetings" EntityType="Self.meetings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="typeStatusMeeting" EntityType="Self.typeStatusMeeting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__connectCh__id_ad__173876EA" Association="Self.FK__connectCh__id_ad__173876EA">
+      <End Role="admins" EntitySet="admins" />
+      <End Role="connectChatAdmin" EntitySet="connectChatAdmin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__connectCh__id_ch__164452B1" Association="Self.FK__connectCh__id_ch__164452B1">
+      <End Role="chats" EntitySet="chats" />
+      <End Role="connectChatAdmin" EntitySet="connectChatAdmin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__connectUs__id_fi__2DE6D218" Association="Self.FK__connectUs__id_fi__2DE6D218">
+      <End Role="finishedMeetings" EntitySet="finishedMeetings" />
+      <End Role="connectUsersFinishedMeetings" EntitySet="connectUsersFinishedMeetings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__connectUs__id_us__2EDAF651" Association="Self.FK__connectUs__id_us__2EDAF651">
+      <End Role="users" EntitySet="users" />
+      <End Role="connectUsersFinishedMeetings" EntitySet="connectUsersFinishedMeetings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__finishedM__id_me__2B0A656D" Association="Self.FK__finishedM__id_me__2B0A656D">
+      <End Role="meetings" EntitySet="meetings" />
+      <End Role="finishedMeetings" EntitySet="finishedMeetings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__meetings__id_cha__1BFD2C07" Association="Self.FK__meetings__id_cha__1BFD2C07">
+      <End Role="chats" EntitySet="chats" />
+      <End Role="meetings" EntitySet="meetings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__meetings__status__1CF15040" Association="Self.FK__meetings__status__1CF15040">
+      <End Role="typeStatusMeeting" EntitySet="typeStatusMeeting" />
+      <End Role="meetings" EntitySet="meetings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

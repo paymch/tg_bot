@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a999494c5baf4ca3875d941c047a0fde" Name="Diagram1">
+        <EntityTypeShape EntityType="stsmeepupModel.connectChatAdmin" Width="1.5" PointX="3.375" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="stsmeepupModel.typeStatusMeeting" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="stsmeepupModel.meetings" Width="1.5" PointX="6" PointY="2" />
+        <AssociationConnector Association="stsmeepupModel.FK__meetings__status__1CF15040" />
+        <EntityTypeShape EntityType="stsmeepupModel.sysdiagrams" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="stsmeepupModel.admins" Width="1.5" PointX="3.75" PointY="3.375" />
+        <AssociationConnector Association="stsmeepupModel.FK__connectCh__id_ad__173876EA" />
+        <EntityTypeShape EntityType="stsmeepupModel.chats" Width="1.5" PointX="1.125" PointY="4.25" />
+        <AssociationConnector Association="stsmeepupModel.FK__connectCh__id_ch__164452B1" />
+        <AssociationConnector Association="stsmeepupModel.FK__meetings__id_cha__1BFD2C07" />
+        <EntityTypeShape EntityType="stsmeepupModel.connectUsersFinishedMeetings" Width="1.5" PointX="10.5" PointY="3.625" />
+        <EntityTypeShape EntityType="stsmeepupModel.finishedMeetings" Width="1.5" PointX="8.25" PointY="3.625" />
+        <EntityTypeShape EntityType="stsmeepupModel.users" Width="1.5" PointX="8.25" PointY="0.75" />
+        <AssociationConnector Association="stsmeepupModel.FK__connectUs__id_fi__2DE6D218" />
+        <AssociationConnector Association="stsmeepupModel.FK__connectUs__id_us__2EDAF651" />
+        <AssociationConnector Association="stsmeepupModel.FK__finishedM__id_me__2B0A656D" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
